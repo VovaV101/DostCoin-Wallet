@@ -1,19 +1,27 @@
+// Функція для входу в гаманець
 function loginWallet() {
     const seed = document.getElementById('seedInput').value.trim();
+
     if (!seed) {
         alert('Будь ласка, введіть seed-фразу!');
         return;
     }
 
-    // Генеруємо фейкову адресу
-    const address = "0x" + Math.random().toString(36).substring(2, 15);
+    // Створюємо фейкову адресу
+    const address = "0x" + Math.random().toString(36).substr(2, 10);
+    const balance = 1000000; // Початковий баланс
 
-    // Виводимо адресу і фейковий баланс
-    document.getElementById('address').textContent = address;
-    document.getElementById('balance').textContent = "1,000,000 DOST (тестовий)";
+    // Зберігаємо дані в LocalStorage
+    localStorage.setItem('address', address);
+    localStorage.setItem('balance', balance);
+
+    // Відображаємо дані
+    document.getElementById('address').innerText = address;
+    document.getElementById('balance').innerText = balance + " DOST";
     document.getElementById('walletInfo').classList.remove('hidden');
 }
 
+// Функція для надсилання монет
 function sendCoins() {
-    alert('Функція надсилання монет у тестовій версії поки що недоступна.');
+    alert('Надсилання монет поки що в розробці!');
 }
