@@ -1,24 +1,25 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="uk">
 <head>
     <meta charset="UTF-8">
-    <title>DostCoin Wallet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Гаманець DostCoin</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="wallet">
-        <h1>DostCoin Wallet</h1>
-        <label for="seed">Встав свою seed-фразу:</label><br>
-        <textarea id="seed" rows="4" cols="80">clarity arrow vault belt calm island shell robot jealous easily parade wine</textarea><br><br>
-        <button onclick="login()">Увійти в гаманець</button>
-        <p><strong>Адреса:</strong> 0xdostcoin_user_address</p>
-        <p><strong>Баланс:</strong> 1,000,000 DOST (тестовий)</p>
+
+<div class="container">
+    <h1>DostCoin Wallet</h1>
+    <textarea id="seedInput" placeholder="Вставте свою seed-фразу..."></textarea>
+    <button onclick="loginWallet()">Увійти в гаманець</button>
+
+    <div id="walletInfo" class="hidden">
+        <p><strong>Адреса:</strong> <span id="address">...</span></p>
+        <p><strong>Баланс:</strong> <span id="balance">...</span></p>
+        <button onclick="sendCoins()">Надіслати монети</button>
     </div>
-    <script>
-        function login() {
-            alert("Успішний вхід! (Тестовий режим)");
-        }
-    </script>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
