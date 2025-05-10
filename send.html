@@ -2,66 +2,56 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Надіслати монети — DostCoin</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
+  <div class="wallet-container">
+    <h1>Надіслати DOST</h1>
 
-<div class="send-container">
-  <h1>Надіслати DOST</h1>
+    <input type="text" id="recipient" placeholder="Адреса отримувача">
+    <input type="number" id="amount" placeholder="Сума монет">
 
-  <form id="sendForm">
-    <label for="recipient">Адреса отримувача:</label>
-    <input type="text" id="recipient" required>
+    <button onclick="submitTransaction()">Надіслати</button>
+    <button onclick="goBack()">Назад до гаманця</button>
 
-    <label for="amount">Кількість монет:</label>
-    <input type="number" id="amount" required>
-
-    <button type="submit">Відправити</button>
-    <button type="button" onclick="goBack()">Назад</button>
-  </form>
-
-  <div id="sendResult" class="hidden">
-    <p id="resultMessage"></p>
-    <button onclick="goBack()">Повернутися до гаманця</button>
+    <p id="status" style="margin-top: 20px; color: green;"></p>
   </div>
 
-</div>
+  <script>
+    function submitTransaction() {
+      const to = document.getElementById('recipient').value.trim();
+      const amount = parseFloat(document.getElementById('amount').value.trim());
+      const status = document.getElementById('status');
 
-<script>
-  const balance = parseInt(localStorage.getItem('balance') || '1000000');
+      if (!to || isNaN(amount) || amount <= 0) {
+        alert("Введіть коректні дані!");
+        return;
+      }
 
-  document.getElementById('sendForm').addEventListener('submit', function(event) {
-    event.preventDefault();
+      let balance = Number(localStorage.getItem('balance')) || 0;
 
-    const recipient = document.getElementById('recipient').value.trim();
-    const amount = parseInt(document.getElementById('amount').value.trim());
+      if (amount > balance) {
+        alert("Недостатньо коштів.");
+        return;
+      }
 
-    if (!recipient || isNaN(amount) || amount <= 0) {
-      alert('Будь ласка, введіть коректні дані.');
-      return;
+      balance -= amount;
+      localStorage.setItem('balance', balance.toString());
+
+      const tx = `Відправлено ${amount} DOST на ${to}`;
+      const txns = JSON.parse(localStorage.getItem('transactions') || '[]');
+      txns.unshift(tx);
+      localStorage.setItem('transactions', JSON.stringify(txns));
+
+      status.textContent = "✅ Монети успішно надіслано!";
+      document.getElementById('recipient').value = "";
+      document.getElementById('amount').value = "";
     }
 
-    if (amount > balance) {
-      alert('Недостатньо коштів.');
-      return;
+    function goBack() {
+      window.location.href = "index.html";
     }
-
-    document.getElementById('sendForm').classList.add('hidden');
-    document.getElementById('sendResult').classList.remove('hidden');
-
-    document.getElementById('resultMessage').textContent =
-      `Ви успішно відправили ${amount} DOST на адресу ${recipient} (тестова транзакція).`;
-
-    // Тут можна реалізувати справжнє зменшення балансу
-  });
-
-  function goBack() {
-    window.location.href = 'wallet.html';
-  }
-</script>
-<script src="js/script.js" defer></script>
-
+  </script>
 </body>
 </html>
