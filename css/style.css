@@ -52,3 +52,23 @@ button:hover {
 .hidden {
     display: none;
 }
+.footer {
+    margin-top: 40px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .footer details summary {
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 8px;
+  }
+  
+  .footer ul {
+    list-style: none;
+    padding: 0;
+  }
+  .footer li {
+    margin: 5px 0;
+  }
