@@ -26,16 +26,15 @@
     <div class="wallet-container">
         <img src="img/logo.png" alt="DostCoin Wallet" class="logo">
         <h1>Вітаємо у DostCoin Wallet</h1>
-        <textarea id="seedInput" placeholder="Вставте свою seed-фразу..."></textarea>
-        <button onclick="loginWallet()">Увійти в гаманець</button>
-
+        <button onclick="connectWallet()">🦊 Увійти через Metamask</button>
         <div id="walletInfo" class="hidden">
             <p><strong>Адреса:</strong> <span id="address">...</span></p>
             <p><strong>Баланс:</strong> <span id="balance">...</span></p>
             <button onclick="sendCoins()">Надіслати монети</button>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+    <script src="js/web3-init.js" defer></script>
     <script src="js/script.js" defer></script>
 </body>
 </html>
